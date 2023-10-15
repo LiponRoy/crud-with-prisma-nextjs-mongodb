@@ -30,7 +30,7 @@ const Modal = ({ modalOpen, body, onClose, onSubmit }: modalProps) => {
 	}
 	return (
 		<div
-			className={` h-screen w-full flex justify-center items-center  h-full w-full ${
+			className={` inset-0 fixed h-screen w-full flex justify-center items-center  h-full w-full ${
 				showModal ? 'bg-black/40' : ''
 			}`}
 		>

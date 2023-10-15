@@ -1,11 +1,11 @@
-import Modal from '@/components/modals/Modal';
-import Image from 'next/image'
+import DataList from "@/components/DataList";
 
 export default function Home() {
   return ( 
     <div >
-      {/* <span>Home Page ......</span> */}
-      <Modal/>
+      {/* <span className=" text-4xl">Home Page ......</span> */}
+      <DataList/>
+     
     </div>
   )
 }
