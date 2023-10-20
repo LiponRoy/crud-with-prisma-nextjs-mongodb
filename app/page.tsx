@@ -1,11 +1,9 @@
 import DataList from "@/components/DataList";
-
 export default function Home() {
-  return ( 
+
+  return (
     <div >
-      {/* <span className=" text-4xl">Home Page ......</span> */}
-      <DataList/>
-     
+      <DataList />
     </div>
   )
 }
