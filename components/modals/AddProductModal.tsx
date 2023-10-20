@@ -4,10 +4,11 @@ import React from 'react';
 import Modal from './Modal';
 import useAddModalStore from '@/hooks/useAddData';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import axios from 'axios';
 import Input from '../Input';
+import { useAddDataMutation } from '@/redux/feature/api';
 
 const AddProductModal = () => {
+	const [addData, { isLoading: addLoading, isSuccess }] = useAddDataMutation();
 	const addModal = useAddModalStore();
 	const [isLoading, setIsLoading] = useState(false);
 	const {
@@ -46,21 +47,10 @@ const AddProductModal = () => {
 		</div>
 	);
 
-	const onSubmit: SubmitHandler<FieldValues> = (data) => {
-		setIsLoading(true);
+	const onSubmit: SubmitHandler<FieldValues> = async (data) => {
 
-		axios
-			.post('/api/post', data)
-			.then(() => {
-				addModal.onClose();
-				console.log('Data posted');
-			})
-			.catch((error) => {
-				console.log('Error', error);
-			})
-			.finally(() => {
-				setIsLoading(false);
-			});
+		await addData(data)
+		addModal.onClose();
 	};
 
 	return (

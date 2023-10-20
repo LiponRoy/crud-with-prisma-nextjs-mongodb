@@ -1,20 +1,23 @@
 "use client"
 import { useGetUsersQuery } from '@/redux/feature/api';
-import { useDispatch, useSelector } from 'react-redux';
 
 const DataList = () => {
-  // const dispatch = useDispatch();
-  const { data: dataAll, isFetching } = useGetUsersQuery();
+  const { data: dataAll, isFetching, isLoading } = useGetUsersQuery();
   console.log(dataAll)
 
   return (
     <div >
 
-      {dataAll?.map((data) => (
+      {isLoading ? <div>Loading...</div> : dataAll?.map((data) => (
         <div key={data.id} className="">
-          <span>{data.title}</span>
+          <div className=" flex flex-col justify-center items-center m-2 p-2 bg-slate-300 shadow-md rounded-md">
+            <span>{data?.title}</span>
+            <span>{data?.description}</span>
+          </div>
         </div>
       ))}
+
+
 
 
     </div>

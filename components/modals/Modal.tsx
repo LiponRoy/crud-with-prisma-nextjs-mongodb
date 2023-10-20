@@ -30,16 +30,14 @@ const Modal = ({ modalOpen, body, onClose, onSubmit }: modalProps) => {
 	}
 	return (
 		<div
-			className={` inset-0 fixed h-screen w-full flex justify-center items-center  h-full w-full ${
-				showModal ? 'bg-black/40' : ''
-			}`}
+			className={` inset-0 fixed h-screen w-full flex justify-center items-center  h-full w-full ${showModal ? 'bg-black/40' : ''
+				}`}
 		>
 			<div
-				className={`relative w-[400px] md:w-[600px] h-[300px] md:h-[500px] overflow-y-auto bg-slate-300 text-lg rounded-md order-1 shadow-md flex flex-col justify-center items-center translate duration-300 ${
-					showModal
+				className={`relative w-[400px] md:w-[600px] h-[300px] md:h-[500px] overflow-y-auto bg-slate-300 text-lg rounded-md order-1 shadow-md flex flex-col justify-center items-center translate duration-300 ${showModal
 						? ' translate-y-0 opacity-100'
 						: 'translate-y-full opacity-0'
-				}`}
+					}`}
 			>
 				{body}
 				<Button

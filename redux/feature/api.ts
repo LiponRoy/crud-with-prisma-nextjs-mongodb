@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 interface RTKData {
@@ -9,29 +8,28 @@ interface RTKData {
 }
 
 export const api = createApi({
-	// baseQuery: fetchBaseQuery({
-	// 	baseUrl: 'https://jsonplaceholder.typicode.com/users',
-	// }),
-
 	reducerPath: 'instructorsApi',
 	baseQuery: fetchBaseQuery({
-		baseUrl: 'https://jsonplaceholder.typicode.com/',
+		baseUrl: 'http://localhost:3000/',
 	}),
 	tagTypes: ['Instructor'],
 
 	endpoints: (builder) => ({
-		// Define your endpoints here
-		// For example:
-		// getUsers: builder.query<Array<RTKData>, void>({
-		// 	query: () => 'users',
-		// }),
 		GetUsers: builder.query<Array<RTKData>, void>({
-			query: () => '/posts',
+			query: () => '/api/post',
 			transformResponse: (res: any) => res.reverse(),
 			providesTags: ['Instructor'],
+		}),
+		addData: builder.mutation({
+			query: (instructor) => ({
+				url: '/api/post',
+				method: 'POST',
+				body: instructor,
+			}),
+			invalidatesTags: ['Instructor'],
 		}),
 	}),
 });
 
 // Export hooks for usage in components
-export const { useGetUsersQuery } = api;
+export const { useGetUsersQuery, useAddDataMutation } = api;
