@@ -1,10 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 interface RTKData {
-	userId: number;
-	id: number;
+	id: number | string;
 	title: string;
-	body: string;
+	description: string;
 }
 
 export const api = createApi({
@@ -28,8 +27,16 @@ export const api = createApi({
 			}),
 			invalidatesTags: ['Instructor'],
 		}),
+		deleteData: builder.mutation({
+			query: (_id) => ({
+				url: `/api/post/${_id}`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: ['Instructor'],
+		}),
 	}),
 });
 
 // Export hooks for usage in components
-export const { useGetUsersQuery, useAddDataMutation } = api;
+export const { useGetUsersQuery, useAddDataMutation, useDeleteDataMutation } =
+	api;
