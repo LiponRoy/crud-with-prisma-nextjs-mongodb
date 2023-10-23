@@ -27,6 +27,14 @@ export const api = createApi({
 			}),
 			invalidatesTags: ['Instructor'],
 		}),
+		updateData: builder.mutation({
+			query: ({ _id, ...instructor }) => ({
+				url: `/api/post/${_id}`,
+				method: 'PUT',
+				body: instructor,
+			}),
+			invalidatesTags: ['Instructor'],
+		}),
 		deleteData: builder.mutation({
 			query: (_id) => ({
 				url: `/api/post/${_id}`,
@@ -38,5 +46,9 @@ export const api = createApi({
 });
 
 // Export hooks for usage in components
-export const { useGetUsersQuery, useAddDataMutation, useDeleteDataMutation } =
-	api;
+export const {
+	useGetUsersQuery,
+	useAddDataMutation,
+	useUpdateDataMutation,
+	useDeleteDataMutation,
+} = api;

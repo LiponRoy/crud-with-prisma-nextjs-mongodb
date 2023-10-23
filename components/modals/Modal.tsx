@@ -1,61 +1,27 @@
-'use client';
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react'
 import { RxCross2 } from 'react-icons/rx';
-import Button from '../Button';
 
 interface modalProps {
-	modalOpen: boolean;
-	body?: React.ReactElement;
-	onClose: () => void;
-	onSubmit: () => void;
+    isModalopen: boolean,
+    modalClose: () => void,
+    children: React.ReactNode
 }
 
-const Modal = ({ modalOpen, body, onClose, onSubmit }: modalProps) => {
-	const [showModal, setShowModal] = useState(modalOpen);
+const Modal = ({ isModalopen, modalClose, children }: modalProps) => {
+    return (
+        isModalopen && <div className=' bg-black/50 fixed inset-0'>
+            <div className=" flex justify-center items-center h-full">
+                <div className=" relative bg-slate-300 w-2/3 h-2/3 flex flex-col justify-center items-center">
+                    <button onClick={modalClose} className=' absolute top-2 right-2 text-black' >
+                        <RxCross2 size={24} />
+                    </button>
+                    {children}
+                </div>
+            </div>
 
-	useEffect(() => {
-		setShowModal(modalOpen);
-	}, [modalOpen]);
 
-	const handleSubmit = useCallback(() => {
-		// if (disabled) {
-		// 	return;
-		// }
+        </div>
+    )
+}
 
-		onSubmit();
-	}, [onSubmit]);
-
-	if (!modalOpen) {
-		return null;
-	}
-	return (
-		<div
-			className={` inset-0 fixed h-screen w-full flex justify-center items-center  h-full w-full ${showModal ? 'bg-black/40' : ''
-				}`}
-		>
-			<div
-				className={`relative w-[400px] md:w-[600px] h-[300px] md:h-[500px] overflow-y-auto bg-slate-300 text-lg rounded-md order-1 shadow-md flex flex-col justify-center items-center translate duration-300 ${showModal
-						? ' translate-y-0 opacity-100'
-						: 'translate-y-full opacity-0'
-					}`}
-			>
-				{body}
-				<Button
-					myClassName=" w-72 h-10 bg-slate-600 text-slate-200 my-2"
-					type="submit"
-					title="SUBMIT"
-					onClick={handleSubmit}
-				/>
-
-				<div
-					onClick={onClose}
-					className=" absolute top-4 right-4 cursor-pointer hover:border hover:bg-slate-700 hover:text-slate-200 hover:rounded-md "
-				>
-					<RxCross2 size="24" />
-				</div>
-			</div>
-		</div>
-	);
-};
-
-export default Modal;
+export default Modal

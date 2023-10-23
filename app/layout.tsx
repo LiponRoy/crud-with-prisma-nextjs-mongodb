@@ -1,9 +1,9 @@
-import AddProductModal from '@/components/modals/AddProductModal';
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Navbar from '@/components/navbar/Navbar';
 import ReduxProvider from '@/provider/ReduxProvider'
+import AddData from '@/components/AddData';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ReduxProvider>
           <Navbar />
-          <AddProductModal />
+          <AddData />
           {children}
         </ReduxProvider>
       </body>
