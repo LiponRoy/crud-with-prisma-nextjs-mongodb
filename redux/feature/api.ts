@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 interface RTKData {
-	id: number | string;
+	id: string;
 	title: string;
 	description: string;
 }
