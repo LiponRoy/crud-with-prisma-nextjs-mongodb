@@ -4,10 +4,11 @@ import React, { useEffect } from 'react';
 import MyData from './MyData';
 
 
-
 const AllData = () => {
 
-    const { data: dataAll, isFetching, isLoading } = useGetUsersQuery();
+    const { data: dataAll, isFetching, isLoading, isSuccess } = useGetUsersQuery();
+
+
 
     const all = () => {
         return isLoading ? <span className='text-green-900'>Loading...</span> : <div>
@@ -23,10 +24,6 @@ const AllData = () => {
         </div>
     }
 
-    // useEffect(() => {
-    //     all();
-
-    // }, [])
 
 
 

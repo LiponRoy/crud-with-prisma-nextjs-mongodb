@@ -23,8 +23,6 @@ const MyData = ({ id, title, description }: MyDataProps) => {
 
     }
 
-    console.log(updateId);
-
     const deleteHandle = async (id: string) => {
         await DeleteData(id);
     }

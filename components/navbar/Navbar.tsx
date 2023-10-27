@@ -6,7 +6,7 @@ import React from 'react'
 const Navbar = () => {
   const addModal = useAddModalStore();
 
-  console.log("navIsopen : ", addModal.isOpen)
+  // console.log("navIsopen : ", addModal.isOpen)
 
   return (
     <>
@@ -14,7 +14,7 @@ const Navbar = () => {
 
         {/* <span onClick={addModal.onOpen}>Add Data</span> */}
         {/* <Button myClassName=' h-10 bg-slate-600 text-slate-200 my-2 px-2 rounded-md ' type='button' onClick={addModal.onOpen} title='Create Data' /> */}
-        <button onClick={addModal.onOpen}>Add Data</button>
+        <button onClick={() => addModal.onOpen()}>Add Data</button>
 
       </div>
     </>

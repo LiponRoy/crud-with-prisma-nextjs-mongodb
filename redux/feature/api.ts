@@ -9,7 +9,7 @@ interface RTKData {
 export const api = createApi({
 	reducerPath: 'instructorsApi',
 	baseQuery: fetchBaseQuery({
-		baseUrl: 'http://localhost:3000/',
+		baseUrl: 'http://localhost:3000',
 	}),
 	tagTypes: ['Instructor'],
 
@@ -28,10 +28,10 @@ export const api = createApi({
 			invalidatesTags: ['Instructor'],
 		}),
 		updateData: builder.mutation({
-			query: ({ _id, ...instructor }) => ({
+			query: ({ _id, ...singleData }) => ({
 				url: `/api/post/${_id}`,
 				method: 'PUT',
-				body: instructor,
+				body: singleData,
 			}),
 			invalidatesTags: ['Instructor'],
 		}),

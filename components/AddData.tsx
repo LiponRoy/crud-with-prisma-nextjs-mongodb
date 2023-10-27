@@ -1,30 +1,23 @@
 "use client"
-import React, { useEffect, useState } from 'react'
 import Modal from './modals/Modal'
 import useAddModalStore from '@/hooks/useAddData'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAddDataMutation, useGetUsersQuery, useUpdateDataMutation } from '@/redux/feature/api';
 import Input from './Input';
 
-
-
 const AddData = () => {
 
     const { isOpen, setUdateId, onClose, updateId } = useAddModalStore()
+
     const [addData, { isLoading, isSuccess, isError }] = useAddDataMutation();
     const [updateData, { isLoading: updateLoading, isSuccess: updateSuccess }] = useUpdateDataMutation();
     const { data: dataAll, isFetching } = useGetUsersQuery();
-
-
     const singleData = dataAll?.find((dataA) => dataA.id === updateId);
-    console.log(singleData, "singleData")
 
     const ModalClose = () => {
         setUdateId("")
         onClose()
     }
-
-    console.log("all data", dataAll)
 
     const {
         register,
@@ -33,21 +26,18 @@ const AddData = () => {
         formState: { errors },
     } = useForm<FieldValues>({
         values: {
-            title: singleData?.title,
-            description: singleData?.description,
+            title: singleData?.title || "",
+            description: singleData?.description || "",
         },
     });
 
-    console.log(singleData?.id, "Single Data")
-
-
-
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+
         try {
-            updateId && updateId !== "" ? await updateData(singleData) : await addData(data);
+            updateId && updateId !== "" ? await updateData({ _id: singleData?.id, ...data }) : await addData(data);
 
         } catch (error) {
-            console.log(error)
+            console.log('ER', error)
 
         }
         reset();
@@ -56,7 +46,6 @@ const AddData = () => {
         }, 2000);
         setUdateId("");
     };
-
 
     const bodyContent = (
         <div className="flex flex-col gap-4">
@@ -87,7 +76,9 @@ const AddData = () => {
 
 
     return (
-        <Modal isModalopen={isOpen} modalClose={ModalClose} children={bodyContent} />
+        <Modal isModalopen={isOpen} modalClose={ModalClose}  >
+            {bodyContent}
+        </Modal>
     )
 }
 
